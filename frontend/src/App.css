@@ -1,0 +1,88 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.layout {
+  min-height: 100vh;
+}
+
+.header {
+  background: #fff;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  height: 120px;
+  line-height: 120px;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+
+.content {
+  padding: 24px;
+  background: #f0f2f5;
+}
+
+.ant-layout-header {
+  height: 120px;
+  line-height: 120px;
+  padding: 0;
+}
+
+.ant-card {
+  margin: 0 !important;
+}
+
+.ant-statistic {
+  margin: 0 !important;
+}
+
+/* Custom styles for the header space items */
+.custom-header-space .ant-space-item {
+  height: 20px;
+  display: flex; /* Added to help with vertical alignment within the item */
+  align-items: center; /* Added to help with vertical alignment within the item */
+}
+
+/* Attempt to override browser autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important; /* Use a large white inset shadow to cover the autofill color */
+    /* You might also want to override text fill color if the browser changes it */
+    /* -webkit-text-fill-color: #000 !important; */ 
+}

@@ -1,0 +1,65 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 280px); /* 您可以根据页面顶部元素实际占用的高度调整 280px 这个值 */
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden; /* 确保子元素不会溢出圆角边界 */
+    background-color: #fff;
+  }
+  
+  .chat-messages {
+    flex-grow: 1; /* 占据所有可用垂直空间 */
+    overflow-y: auto; /* 当内容超出时显示垂直滚动条 */
+    padding: 16px;
+    /* 如果需要更明显的"蒙版"效果，可以取消下一行注释并设置背景色 */
+    /* background-color: #f9f9f9; */ 
+  }
+  
+  /* 移除 Ant Design List 组件默认的条目下边框，并调整内边距 */
+  .chat-messages .ant-list-item {
+    border-bottom: none !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+  
+  /* 确保头像在消息气泡的顶部对齐 */
+  .chat-messages .ant-list-item-meta-avatar {
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+  
+  /* AI 消息气泡样式 */
+  .chat-messages .ant-list-item-meta-content {
+    background-color: #f0f2f5; /* AI 消息背景色 */
+    border-radius: 10px;
+    padding: 8px 12px;
+    max-width: 80%; /* 限制消息气泡最大宽度 */
+  }
+  
+  /* 用户消息气泡样式 */
+  .chat-messages .user-message .ant-list-item-meta-content {
+    background-color: rgba(22, 119, 255, 0.1); /* 用户消息背景色，10%透明度 */
+    color: #1677ff; /* 用户消息文字颜色改为蓝色 */
+    margin-left: auto; /* 使内容气泡靠右对齐 (头像仍在左侧) */
+    max-width: fit-content; /* 根据内容自适应宽度 */
+    min-width: 60px; /* 设置最小宽度 */
+  }
+  
+  /* 确保用户消息气泡内的描述文字也是蓝色 */
+  .chat-messages .user-message .ant-list-item-meta-description {
+   color: #1677ff !important; 
+  }
+  
+  
+  .chat-input-area {
+    padding: 16px;
+    border-top: 1px solid #f0f0f0; /* 输入区域顶部分隔线 */
+    background-color: #fff; /* 输入区域背景色 */
+    flex-shrink: 0; /* 防止输入区域被压缩 */
+  }
+  
+  /* 移除输入框在 Space.Compact 内可能产生的额外下边距 */
+  .chat-input-area .ant-space-compact .ant-input-affix-wrapper {
+      margin-bottom: 0;
+  }
