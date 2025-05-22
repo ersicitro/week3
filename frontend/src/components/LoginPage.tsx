@@ -63,10 +63,21 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f0f2f5' }}>
+    <div style={{ 
+      display: 'flex', 
+      justifyContent: 'center', 
+      alignItems: 'center', 
+      height: '100vh', 
+      background: '#f0f2f5',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif'
+    }}>
       <Card style={{ width: 400, padding: '20px' }}>
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <Title level={2}>{mode === 'login' ? '记账小程序登录' : '创建新账户'}</Title>
+          <Title level={2} style={{ 
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
+            fontWeight: 500,
+            letterSpacing: '0.5px'
+          }}>{mode === 'login' ? '记账小程序登录' : '创建新账户'}</Title>
         </div>
         <Form
           form={form}

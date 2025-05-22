@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Bill
+from .models import Bill, AnalysisHistory
 from .serializers import BillSerializer, UserRegistrationSerializer
 from django.db.models import Sum
 from django.utils import timezone
@@ -286,69 +286,46 @@ class UserRegistrationView(APIView):
 @permission_classes([IsAuthenticated])
 def analyze_text_view(request):
     """
-    Receives a question from the user and their cached bill data,
-    maintains conversation history, and returns the response.
+    后端自动隔离和保存每个用户的智能分析历史。
     """
+    user = request.user
     user_question = request.data.get('text', '')
     bills_data = request.data.get('bills', [])
-    conversation_history = request.data.get('conversation_history', [])
     
     if not user_question:
         return Response({'error': '请输入您的问题。'}, status=status.HTTP_400_BAD_REQUEST)
 
+    # 获取或创建用户的分析历史
+    history_obj, _ = AnalysisHistory.objects.get_or_create(user=user)
+    conversation_history = history_obj.history or []
+
     # 构建消息历史
     messages = []
-    
-    # 如果是第一次对话，添加账单数据
     if not conversation_history:
-        # 1. Format bill data for the LLM
+        # 第一次对话，添加账单数据
         if not bills_data:
             formatted_bills_string = "用户目前没有任何账单记录。"
         else:
-            # Simple text list format
             bill_lines = ["日期 | 收支 | 类型 | 金额 | 备注"]
             bill_lines.append("-----------------------------------")
-            for bill in bills_data[:100]: # Limit to latest 100 records
-                # Map category value to label for better readability
-                category_label = bill['category'] # Default to value if no match found
+            for bill in bills_data[:100]:
+                category_label = bill['category']
                 if bill['type'] == 'income':
                     category_label = dict(Bill.INCOME_CATEGORY_CHOICES).get(bill['category'], bill['category'])
                 elif bill['type'] == 'expense':
                     category_label = dict(Bill.EXPENSE_CATEGORY_CHOICES).get(bill['category'], bill['category'])
-                
                 remark_str = bill['remark'] if bill['remark'] else "无"
                 type_str = dict(Bill.TYPE_CHOICES).get(bill['type'], bill['type'])
                 line = f"{bill['date']} | {type_str} | {category_label} | {float(bill['amount']):.2f} | {remark_str}"
                 bill_lines.append(line)
             formatted_bills_string = "\n".join(bill_lines)
-
-        # 添加系统消息，包含账单数据
         messages.append({
             'role': 'system',
-            'content': f"""你是一个智能账单分析助手。以下是用户的账单记录：
-
---- 开始账单记录 ---
-{formatted_bills_string}
---- 结束账单记录 ---
-
-请注意：
-- 你的回答应主要基于上面提供的账单数据。
-- 如果数据中没有足够的信息来回答问题，请明确说明。
-- 不要编造数据或回答数据之外的信息。
-- 请用自然、流畅的中文来回答问题，就像与人对话一样。"""
+            'content': f"""你是一个智能账单分析助手。以下是用户的账单记录：\n\n--- 开始账单记录 ---\n{formatted_bills_string}\n--- 结束账单记录 ---\n\n请注意：\n- 你的回答应主要基于上面提供的账单数据。\n- 如果数据中没有足够的信息来回答问题，请明确说明。\n- 不要编造数据或回答数据之外的信息。\n- 请用自然、流畅的中文来回答问题，就像与人对话一样。"""
         })
     else:
-        # 如果不是第一次对话，添加之前的对话历史
         messages.extend(conversation_history)
-
-    # 添加用户的新问题
-    messages.append({
-        'role': 'user',
-        'content': user_question
-    })
-    
-    logger.info(f"Sending analysis request to Deepseek for user {request.user.id}")
-    logger.debug(f"Messages for user {request.user.id}:\n{messages}")
+    messages.append({'role': 'user', 'content': user_question})
 
     # 调用 Deepseek API
     try:
@@ -367,28 +344,33 @@ def analyze_text_view(request):
         )
         response.raise_for_status()
         result = response.json()
-        
-        logger.info(f"Received analysis response from Deepseek for user {request.user.id}")
-
-        # 返回响应
         if 'choices' in result and len(result['choices']) > 0:
             analysis_result = result['choices'][0]['message']['content']
-            # 更新对话历史
+            # 更新历史并保存
             updated_history = messages + [{'role': 'assistant', 'content': analysis_result}]
+            history_obj.history = updated_history
+            history_obj.save()
             return Response({
                 'analysis': analysis_result,
                 'conversation_history': updated_history
             }, status=status.HTTP_200_OK)
         else:
-            logger.error(f"Deepseek response missing choices for user {request.user.id}. Response: {result}")
             return Response({'error': '未能从 Deepseek 获取有效分析结果。'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
     except requests.exceptions.Timeout:
-        logger.error(f"Deepseek API request timed out for user {request.user.id}")
         return Response({'error': '请求分析服务超时，请稍后重试。'}, status=status.HTTP_504_GATEWAY_TIMEOUT)
     except requests.exceptions.RequestException as e:
-        logger.error(f"Error calling Deepseek API for user {request.user.id}: {e}")
         return Response({'error': '调用分析服务时出错。'}, status=status.HTTP_502_BAD_GATEWAY)
     except Exception as e:
-        logger.exception(f"Unexpected error during text analysis for user {request.user.id}")
         return Response({'error': '处理分析请求时发生内部错误。'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_analysis_history(request):
+    """
+    获取当前用户的智能分析历史。
+    """
+    user = request.user
+    history_obj, _ = AnalysisHistory.objects.get_or_create(user=user)
+    return Response({
+        'history': history_obj.history or []
+    }, status=status.HTTP_200_OK)

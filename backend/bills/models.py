@@ -43,3 +43,11 @@ class Bill(models.Model):
 
     def __str__(self):
         return f"{self.date} - {self.remark or '无备注'} - {self.amount}"
+
+class AnalysisHistory(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='analysis_history')
+    history = models.JSONField(default=list, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.username} 的分析历史"

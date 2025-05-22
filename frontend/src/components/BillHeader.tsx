@@ -35,12 +35,21 @@ const BillHeader: React.FC<BillHeaderProps> = ({ refreshKey, apiClient, username
       justifyContent: 'space-between', 
       alignItems: 'center',
       width: '100%',
-      height: '100%'
+      height: '100%',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif'
     }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16, flexShrink: 0 }}>
-        <Title level={4} style={{ margin: 0, marginLeft: 24 }}>记账小程序</Title>
+        <Title level={4} style={{ 
+          margin: 0, 
+          marginLeft: 24,
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
+          fontWeight: 500,
+          letterSpacing: '0.5px'
+        }}>记账小程序</Title>
         <Space className="custom-header-space" style={{ marginLeft: 24, marginRight: 16 }} wrap align="center">
-          <Text>
+          <Text style={{
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif'
+          }}>
             {username ? `${username}您好` : '您好'}，今天是{dayjs().format('YYYY年MM月DD日')}
           </Text>
           {username && (

@@ -126,18 +126,31 @@ const BillList: React.FC<BillListProps> = ({ onDataChange, apiClient }) => {
 
     // --- States for Analysis Chat ---
     const [analysisInput, setAnalysisInput] = useState<string>('');
-    const [chatMessages, setChatMessages] = useState<ChatMessage[]>(() => {
-        // 从 localStorage 读取聊天记录
-        const savedMessages = localStorage.getItem('chatMessages');
-        return savedMessages ? JSON.parse(savedMessages) : [];
-    });
+    const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
     const [analysisLoading, setAnalysisLoading] = useState<boolean>(false);
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
-    // 当聊天记录更新时，保存到 localStorage
+    // 初始化聊天历史
+    const initChatHistory = useCallback(async () => {
+        try {
+            const response = await apiClient.get<{ history: any[] }>('/api/analyze/history/');
+            if (response.data.history && response.data.history.length > 0) {
+                const messages: ChatMessage[] = response.data.history.map((msg, index) => ({
+                    id: index,
+                    sender: msg.role === 'user' ? 'user' : 'ai',
+                    content: msg.content
+                }));
+                setChatMessages(messages);
+            }
+        } catch (error) {
+            console.error('Failed to fetch chat history:', error);
+        }
+    }, [apiClient]);
+
+    // 组件加载时初始化聊天历史
     useEffect(() => {
-        localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
-    }, [chatMessages]);
+        initChatHistory();
+    }, [initChatHistory]);
 
     // --- Auto-scroll useEffect ---
     useEffect(() => {
@@ -169,7 +182,7 @@ const BillList: React.FC<BillListProps> = ({ onDataChange, apiClient }) => {
             const cachedBills = localStorage.getItem('cachedBills');
             const billsData = cachedBills ? JSON.parse(cachedBills) : [];
             
-            const response = await apiClient.post<{ analysis: string }>('/api/analyze/', { 
+            const response = await apiClient.post<{ analysis: string, conversation_history: any[] }>('/api/analyze/', { 
                 text: currentInput,
                 bills: billsData // 每次都发送最新的账单数据
             });
@@ -205,7 +218,6 @@ const BillList: React.FC<BillListProps> = ({ onDataChange, apiClient }) => {
             cancelText: '取消',
             onOk: () => {
                 setChatMessages([]);
-                localStorage.removeItem('chatMessages');
             }
         });
     };
@@ -623,8 +635,8 @@ const BillList: React.FC<BillListProps> = ({ onDataChange, apiClient }) => {
                                      marginBottom: '16px',
                                      padding: '0 16px' // 添加左右内边距
                                  }}>
-                                     <h3>智能分析</h3>
-                                     <Button onClick={handleClearChat}>清除对话</Button>
+                                     <h3 style={{ marginTop: '16px' }}>智能分析</h3>
+                                     <Button onClick={handleClearChat} style={{ marginTop: '16px' }}>清除对话</Button>
                                  </div>
                                  <div className="chat-messages" ref={chatContainerRef}>
                                      <List
