@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = { # Restored MySQL config
+DATABASES = { # MySQL config
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'my_bill_app_db',
@@ -92,7 +92,7 @@ DATABASES = { # Restored MySQL config
     }
 }
 
-# DATABASES = { # Temporarily commented out SQLite config
+# DATABASES = { # SQLite config
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': BASE_DIR / 'db.sqlite3',

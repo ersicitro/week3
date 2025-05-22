@@ -633,10 +633,11 @@ const BillList: React.FC<BillListProps> = ({ onDataChange, apiClient }) => {
                                      justifyContent: 'space-between', 
                                      alignItems: 'center', 
                                      marginBottom: '16px',
-                                     padding: '0 16px' // 添加左右内边距
+                                     padding: '0 16px', // 添加左右内边距
+                                     marginTop: '16px' // 添加整体上边距
                                  }}>
-                                     <h3 style={{ marginTop: '16px' }}>智能分析</h3>
-                                     <Button onClick={handleClearChat} style={{ marginTop: '16px' }}>清除对话</Button>
+                                     <h3>智能分析</h3>
+                                     <Button onClick={handleClearChat}>清除对话</Button>
                                  </div>
                                  <div className="chat-messages" ref={chatContainerRef}>
                                      <List

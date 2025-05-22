@@ -1,0 +1,274 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "username": "ersi1",
+            "password": "pbkdf2_sha256$1000000$kyx2V66l8rrOalTTsK4PE3$x6nPDzOPshuiOUpA0Fbdi3Fb1PBl3MHJZNvDCsw93MQ=",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "is_superuser": false,
+            "date_joined": "2025-05-08 02:54:51.676823+00:00",
+            "last_login": null
+        },
+        {
+            "id": 2,
+            "username": "ersi",
+            "password": "pbkdf2_sha256$1000000$4uB72zmJG90TuBsYLh6PFO$vw0BM9IptAAATO7F0khsD1hnMUQCnB6eUJwZq8mn6jo=",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "is_superuser": false,
+            "date_joined": "2025-05-08 02:55:29.735571+00:00",
+            "last_login": null
+        },
+        {
+            "id": 3,
+            "username": "test",
+            "password": "pbkdf2_sha256$1000000$9T5QEe5Qm2OX7k9X8J5jNh$5x6jHb0IALXhiyw+b+cwms4vOU4dmHsdbdtWa43xAxw=",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "is_superuser": false,
+            "date_joined": "2025-05-08 07:01:50.698894+00:00",
+            "last_login": null
+        },
+        {
+            "id": 4,
+            "username": "ersiersi",
+            "password": "pbkdf2_sha256$1000000$GvOuGJntWhjGznGO099BIT$/KQOz7m/nRn4AmshQdeJuEpH0YCVfIbUT19LcHlS8+4=",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "is_superuser": false,
+            "date_joined": "2025-05-09 01:44:30.375089+00:00",
+            "last_login": null
+        },
+        {
+            "id": 5,
+            "username": "ersi22",
+            "password": "pbkdf2_sha256$1000000$6XnyYP8ifyqBCBqeBh6xTP$Wj6pen6QVWe1Rx65LWszV9sA2ByU8hEXJ7Q8iO1a7Mo=",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "is_superuser": false,
+            "date_joined": "2025-05-22 01:38:46.047429+00:00",
+            "last_login": null
+        },
+        {
+            "id": 6,
+            "username": "ersi222",
+            "password": "pbkdf2_sha256$1000000$mKWkCtmAygaal5PSbJ6OAS$zYitiy7SxT7InFGPYKZt4HGCPtAzo5foYf2Fz8BCV/c=",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "is_superuser": false,
+            "date_joined": "2025-05-22 01:41:48.098562+00:00",
+            "last_login": null
+        }
+    ],
+    "bills": [
+        {
+            "id": 15,
+            "user_id": 6,
+            "remark": null,
+            "amount": "30.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-22",
+            "created_at": "2025-05-22 01:42:08.789224+00:00",
+            "updated_at": "2025-05-22 01:42:08.789255+00:00"
+        },
+        {
+            "id": 14,
+            "user_id": 2,
+            "remark": null,
+            "amount": "100.00",
+            "type": "expense",
+            "category": "shopping",
+            "date": "2025-05-09",
+            "created_at": "2025-05-09 01:31:43.787659+00:00",
+            "updated_at": "2025-05-09 01:31:43.787695+00:00"
+        },
+        {
+            "id": 13,
+            "user_id": 2,
+            "remark": null,
+            "amount": "20.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-09",
+            "created_at": "2025-05-09 01:16:08.351856+00:00",
+            "updated_at": "2025-05-09 01:16:08.351878+00:00"
+        },
+        {
+            "id": 12,
+            "user_id": 2,
+            "remark": null,
+            "amount": "20.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-09",
+            "created_at": "2025-05-09 01:14:49.190529+00:00",
+            "updated_at": "2025-05-09 01:14:49.190569+00:00"
+        },
+        {
+            "id": 11,
+            "user_id": 2,
+            "remark": null,
+            "amount": "10.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-08",
+            "created_at": "2025-05-08 10:03:18.679510+00:00",
+            "updated_at": "2025-05-08 10:03:18.679537+00:00"
+        },
+        {
+            "id": 10,
+            "user_id": 2,
+            "remark": null,
+            "amount": "100.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-08",
+            "created_at": "2025-05-08 09:56:41.973565+00:00",
+            "updated_at": "2025-05-08 09:56:41.973601+00:00"
+        },
+        {
+            "id": 9,
+            "user_id": 2,
+            "remark": null,
+            "amount": "20.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-08",
+            "created_at": "2025-05-08 08:45:30.822355+00:00",
+            "updated_at": "2025-05-08 08:45:30.822382+00:00"
+        },
+        {
+            "id": 5,
+            "user_id": 3,
+            "remark": null,
+            "amount": "30.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-08",
+            "created_at": "2025-05-08 07:02:14.485228+00:00",
+            "updated_at": "2025-05-08 07:02:14.485239+00:00"
+        },
+        {
+            "id": 4,
+            "user_id": 1,
+            "remark": "感冒去医院",
+            "amount": "99.00",
+            "type": "expense",
+            "category": "medical",
+            "date": "2025-05-08",
+            "created_at": "2025-05-08 03:10:21.343794+00:00",
+            "updated_at": "2025-05-08 03:10:21.343823+00:00"
+        },
+        {
+            "id": 1,
+            "user_id": 2,
+            "remark": null,
+            "amount": "300.00",
+            "type": "expense",
+            "category": "shopping",
+            "date": "2025-05-08",
+            "created_at": "2025-05-08 02:56:33.303535+00:00",
+            "updated_at": "2025-05-08 02:56:33.303566+00:00"
+        },
+        {
+            "id": 8,
+            "user_id": 2,
+            "remark": null,
+            "amount": "100.00",
+            "type": "expense",
+            "category": "shopping",
+            "date": "2025-05-07",
+            "created_at": "2025-05-08 08:40:05.889176+00:00",
+            "updated_at": "2025-05-08 08:40:05.889190+00:00"
+        },
+        {
+            "id": 6,
+            "user_id": 3,
+            "remark": "麦当劳",
+            "amount": "30.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-07",
+            "created_at": "2025-05-08 07:02:57.634289+00:00",
+            "updated_at": "2025-05-08 07:02:57.634320+00:00"
+        },
+        {
+            "id": 3,
+            "user_id": 1,
+            "remark": "霸王茶姬",
+            "amount": "20.40",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-07",
+            "created_at": "2025-05-08 03:10:21.338546+00:00",
+            "updated_at": "2025-05-08 03:10:21.338960+00:00"
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "remark": "麦当劳",
+            "amount": "100.00",
+            "type": "expense",
+            "category": "food",
+            "date": "2025-05-07",
+            "created_at": "2025-05-08 03:10:21.329722+00:00",
+            "updated_at": "2025-05-08 03:10:21.329769+00:00"
+        }
+    ],
+    "analysis_histories": [
+        {
+            "id": 1,
+            "user_id": 6,
+            "history": [
+                {
+                    "role": "system",
+                    "content": "你是一个智能账单分析助手。以下是用户的账单记录：\n\n--- 开始账单记录 ---\n日期 | 收支 | 类型 | 金额 | 备注\n-----------------------------------\n2025-05-22 | 支出 | 吃饭 | 30.00 | 无\n--- 结束账单记录 ---\n\n请注意：\n- 你的回答应主要基于上面提供的账单数据。\n- 如果数据中没有足够的信息来回答问题，请明确说明。\n- 不要编造数据或回答数据之外的信息。\n- 请用自然、流畅的中文来回答问题，就像与人对话一样。"
+                },
+                {
+                    "role": "user",
+                    "content": "今天花了多少钱"
+                },
+                {
+                    "role": "assistant",
+                    "content": "根据账单记录，2025年5月22日有一笔支出：吃饭花费了30元。所以今天总共花费了30元。"
+                },
+                {
+                    "role": "user",
+                    "content": "今天花了多少钱"
+                },
+                {
+                    "role": "assistant",
+                    "content": "根据您提供的唯一一条账单记录：  \n**2025-05-22 支出 吃饭 30.00元**  \n\n今天（2025年5月22日）的总支出是 **30元**（仅餐饮类）。  \n（当前账单中无其他日期或类型的消费记录。）"
+                }
+            ],
+            "updated_at": "2025-05-22 01:45:06.495280+00:00"
+        },
+        {
+            "id": 2,
+            "user_id": 5,
+            "history": [
+                {
+                    "role": "system",
+                    "content": "你是一个智能账单分析助手。以下是用户的账单记录：\n\n--- 开始账单记录 ---\n用户目前没有任何账单记录。\n--- 结束账单记录 ---\n\n请注意：\n- 你的回答应主要基于上面提供的账单数据。\n- 如果数据中没有足够的信息来回答问题，请明确说明。\n- 不要编造数据或回答数据之外的信息。\n- 请用自然、流畅的中文来回答问题，就像与人对话一样。"
+                },
+                {
+                    "role": "user",
+                    "content": "今天花了多少钱"
+                },
+                {
+                    "role": "assistant",
+                    "content": "根据您提供的账单记录，目前没有任何消费数据。您的账单是空的，所以今天的花费金额无法统计。如果您有新的消费记录，可以随时添加进来，我会帮您分析。  \n\n需要我提醒您如何记录账单吗？"
+                }
+            ],
+            "updated_at": "2025-05-22 01:44:04.386078+00:00"
+        }
+    ]
+}
